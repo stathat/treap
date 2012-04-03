@@ -2,8 +2,14 @@ package treap
 
 import (
 	"fmt"
+        "math/rand"
 	"testing"
 )
+
+func init() {
+	// so that every run is the same seq of rand numbers
+	rand.Seed(0)
+}
 
 func StringLess(p, q interface{}) bool {
 	return p.(string) < q.(string)
@@ -271,5 +277,43 @@ func TestRightRotate(t *testing.T) {
 	}
 	if b.right != e {
 		t.Errorf("expected b.right to be e")
+	}
+}
+
+func treeOfInts(ints []int) (tree *Tree) {
+	tree = NewTree(IntLess)
+	for _, i := range ints {
+		tree.Insert(i, i)
+	}
+	return
+}
+
+func BenchmarkInsert(b *testing.B) {
+	b.StopTimer()
+	ints := rand.Perm(b.N)
+	b.StartTimer()
+	_ = treeOfInts(ints)
+}
+
+func BenchmarkDelete(b *testing.B) {
+	b.StopTimer()
+	ints := rand.Perm(b.N)
+	tree := treeOfInts(ints)
+
+	b.StartTimer()
+	for i := 0; i < b.N; i++ {
+		tree.Delete(i)
+	}
+}
+
+func BenchmarkLookup(b *testing.B) {
+	b.StopTimer()
+	ints := rand.Perm(b.N)
+	tree := treeOfInts(ints)
+	b.StartTimer()
+	for j := 0; j < 10; j++ {
+		for i := 0; i < len(ints)/10; i++ {
+			_ = tree.Exists(ints[i])
+		}
 	}
 }
