@@ -4,7 +4,7 @@ treap
 This Go package provides a balanced binary search tree data structure, expected to have
 logarithmic height.
 
-*NOTE:* This treap1 version is for go version 1.0.
+This is for go version 1.0.
 
 For more on treaps, check out the following links:
 
