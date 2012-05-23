@@ -2,7 +2,7 @@ package treap
 
 import (
 	"fmt"
-        "math/rand"
+	"math/rand"
 	"testing"
 )
 
