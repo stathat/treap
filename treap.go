@@ -83,6 +83,31 @@ func (t *Tree) Len() int {
 	return t.count
 }
 
+// Get the first key, item >= key in the tree.
+func (t *Tree) Ceil(key Key) (k Key, v Item) {
+	t.ceil(t.root, key, &k, &v, false)
+	return k, v
+}
+
+func (t *Tree) ceil(node *Node, key Key, bestK *Key, bestV *Item, found bool) {
+	if node == nil {
+		return
+	}
+	// This found var is neccessary because the empty value of key varies (nil, 0, ""),
+	// so I can't test for it
+	if !t.less(node.key, key) && (!found || t.less(node.key, *bestK)) {
+		found = true
+		*bestK = node.key
+		*bestV = node.item
+	}
+	if t.less(key, node.key) {
+		t.ceil(node.left, key, bestK, bestV, found)
+	}
+	if t.less(node.key, key) {
+		t.ceil(node.right, key, bestK, bestV, found)
+	}
+}
+
 // Get an Item in the tree.
 func (t *Tree) Get(key Key) Item {
 	return t.get(t.root, key)

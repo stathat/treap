@@ -40,6 +40,45 @@ func TestInsert(t *testing.T) {
 	}
 }
 
+func TestCeil(t *testing.T) {
+	tree := NewTree(StringLess)
+	tree.Insert("xyz", "adsf")
+	_, y := tree.Ceil("x")
+	if y != "adsf" {
+		t.Errorf("expected adsf, got %v", y)
+	}
+
+	x, _ := tree.Ceil("y")
+	if x != nil {
+		t.Errorf("expected nil, got %v", x)
+	}
+}
+
+func TestCeilPermutations(t *testing.T) {
+	rounds := 100
+	for r := 0; r < rounds; r++ {
+		n := 30
+		tree := NewTree(IntLess)
+		ints := rand.Perm(n)
+		for _, i := range ints {
+			tree.Insert(i*2, i*2)
+		}
+
+		k, _ := tree.Ceil(n * 2)
+		if k != nil {
+			t.Errorf("expected nil, got %d", k)
+		}
+
+		for i := 0; i < n-1; i++ {
+			j := i*2 + 1
+			k, _ := tree.Ceil(j)
+			if k != j+1 {
+				t.Errorf("expected %d, got %d", j+1, k)
+			}
+		}
+	}
+}
+
 func TestFromDoc(t *testing.T) {
 	tree := NewTree(IntLess)
 	tree.Insert(5, "a")
