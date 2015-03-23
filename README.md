@@ -25,9 +25,9 @@ Contact us
 ----------
 
 We'd love to hear from you if you are using this in your projects!  Please drop us a
-line: [@stat_hat](http://twitter.com/stat_hat) or [contact us here](http://www.stathat.com/docs/contact).
+line: [@stathat](http://twitter.com/stathat) or [contact us here](http://www.stathat.com/docs/contact).
 
 About
 -----
 
-Written by Patrick Crosby at [StatHat](http://www.stathat.com).  Twitter:  [@stat_hat](http://twitter.com/stat_hat)
+Written by Patrick Crosby at [StatHat](http://www.stathat.com).  Twitter:  [@stathat](http://twitter.com/stathat)
